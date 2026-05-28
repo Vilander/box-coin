@@ -10,8 +10,8 @@ export function HomeHeader(){
         colors={[colors.blue[500], colors.blue[800]]}
         style={styles.container}>
             <View>
-                <Text style={styles.total}>Total que você possui</Text>
-                <Text style={styles.label}>R$2.860,00</Text>
+                <Text style={styles.label}>Total que você possui</Text>
+                <Text style={styles.total}>R$2.860,00</Text>
             </View>
         </LinearGradient>
     )
