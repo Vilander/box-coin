@@ -1,0 +1,9 @@
+import { Stack, Tabs } from "expo-router"
+import {colors} from "@/theme/colors"
+
+export default function Layout(){
+    return <Stack screenOptions={{
+        headerShown: false,
+        contentStyle: {backgroundColor: colors.gray[700]}
+    }} />
+}
