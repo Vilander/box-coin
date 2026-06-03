@@ -4,6 +4,6 @@ import {colors} from "@/theme/colors"
 export default function Layout(){
     return <Stack screenOptions={{
         headerShown: false,
-        contentStyle: {backgroundColor: colors.gray[700]}
+        contentStyle: {backgroundColor: colors.white}
     }} />
 }
