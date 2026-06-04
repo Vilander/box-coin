@@ -22,13 +22,18 @@ export function PageHeader({titulo, subtitulo, rightButton}: Props){
                     <MaterialIcons name='arrow-back' size={32} color={colors.black}/>
                 </TouchableOpacity>
                 
-                <TouchableOpacity activeOpacity={0.8} onPress={rightButton?.onPress}>
-                    <MaterialIcons name={rightButton?.icon} size={24} color={colors.gray[500]}/>
-                </TouchableOpacity>
+                {rightButton &&
+                    <TouchableOpacity activeOpacity={0.8} onPress={rightButton?.onPress}>
+                        <MaterialIcons name={rightButton?.icon} size={24} color={colors.gray[500]}/>
+                    </TouchableOpacity>
+                }
 
             </View>
             <Text style={styles.titulo}>{titulo}</Text>
-            <Text style={styles.subtitulo}>{subtitulo}</Text>
+
+            {subtitulo &&
+                <Text style={styles.subtitulo}>{subtitulo}</Text>
+            }
         </View>
     )
 }
