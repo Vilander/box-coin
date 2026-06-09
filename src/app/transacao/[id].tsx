@@ -1,86 +1,33 @@
-import { View, Text } from 'react-native'
-import { router, useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams } from "expo-router"
+import { Text, View } from 'react-native';
+import { useState } from "react";
 
-import { PageHeader } from '@/components/PageHeader'
-import { Button } from '@/components/Button'
-import { Lista } from '@/components/Lista'
-import Progresso from '@/components/Progresso'
-import { Transacoes } from '@/components/Transacoes'
-import { TransacoesTypes } from '@/utils/TransacoesTypes'
+import { PageHeader } from "@/components/PageHeader";
+import { Input } from "@/components/Input";
+import { InputCurrency } from "@/components/InputCurrency";
+import { Button } from "@/components/Button";
+import { TransacoesButton } from "@/components/TransacoesButton";
+import { TransacoesTypes } from "@/utils/TransacoesTypes";
 
-const detalhes = {
-  atual: 'R$ 2.000,00',
-  meta: 'R$ 4.000,00',
-  porcentagem: 50
-}
+export default function Transaction() {
+  const [type, settype] = useState(TransacoesTypes.Input)
 
-const transacoes = [
-  {
-    id: '1',
-    value: 'R$ 300,00',
-    date: '12/04/2026',
-    descricao: 'CDB de 110% do CDI',
-    tipo: TransacoesTypes.Input
-  },
-  {
-    id: '2',
-    value: 'R$ 100,00',
-    date: '14/04/2026',
-    descricao: 'Retirada de emergencia',
-    tipo: TransacoesTypes.Output
-  },
-  {
-    id: '3',
-    value: 'R$ 700,00',
-    date: '16/04/2026',
-    descricao: 'CDB de 110% do CDI',
-    tipo: TransacoesTypes.Input
-  },
-  {
-    id: '4',
-    value: 'R$ 500,00',
-    date: '17/04/2026',
-    descricao: 'Compra Celular!',
-    tipo: TransacoesTypes.Output
-  },
-  {
-    id: '5',
-    value: 'R$ 900,00',
-    date: '17/04/2026',
-    descricao: 'Venda Celular Antigo!',
-    tipo: TransacoesTypes.Input
-  }
-]
-
-export default function EmProgresso() {
   const params = useLocalSearchParams<{ id: string }>()
+
   return (
-    <View style={{ flex: 1, padding: 24, gap: 32 }}>
-      <PageHeader
-        titulo='Apple Watch'
-        rightButton={{
-          icon: 'edit',
-          onPress: () => console.log("Editando meta")
+    <View style={{ flex: 1, padding: 24 }}>
+      <PageHeader titulo="Nova Transação" subtitulo={`A cada valor  guardado voce fica mais perto da sua meta`} />
 
-        }}
-      />
-      <Progresso data={detalhes} />
+      <View style={{ marginTop: 32, gap: 16 }}>
+        <TransacoesButton
+          selected={type}
+          onChange={settype}
+        />
 
-      <Lista
-        titulo='Transações'
-        data={transacoes}
-        renderItem={({ item }) => (
-          <Transacoes data={item} onRemove={() => console.log("Remover Transações")
-          } />
-        )}
-
-      />
-
-      <Button
-        titulo='Nova Transação'
-        onPress={() => router.navigate(`/transacao/${params.id}`)}
-      />
-
+        <InputCurrency label="Valor (R$)" value={0} />
+        <Input label="Motivo (opcional)" placeholder="Ex: CDB de 110% do CDI" />
+        <Button titulo="Salvar Transação" onPress={() => console.log('Salvar transação')} />
+      </View>
     </View>
   )
 }
