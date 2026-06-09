@@ -2,7 +2,7 @@ import {View, Text, Touchable, TouchableOpacity } from "react-native";
 import { styles } from "./styles"
 import { MaterialIcons } from "@expo/vector-icons";
 import { colors } from "@/theme/colors";
-import { TransacoesType } from "@/utils/TransacoesType";
+import { TransacoesTypes } from "@/utils/TransacoesTypes";
 
 
 export type TransacaoProps = {
@@ -10,7 +10,7 @@ export type TransacaoProps = {
     value: string,
     date: string,
     descricao: string,
-    tipo: TransacoesType,
+    tipo: TransacoesTypes,
 }
 
 type Props ={
@@ -23,11 +23,11 @@ export function Transacoes({ data, onRemove}: Props){
         <View style={styles.container}>
             <MaterialIcons 
                 name={
-                    data.tipo === TransacoesType.Input ? 'arrow-upward' : 'arrow-downward'
+                    data.tipo === TransacoesTypes.Input ? 'arrow-upward' : 'arrow-downward'
                 }
                 size={20}
                 color={
-                    data.tipo === TransacoesType.Input ? colors.green[900] : colors.red[400]
+                    data.tipo === TransacoesTypes.Input ? colors.green[900] : colors.red[400]
                 }
             />
             <View style={styles.info}>

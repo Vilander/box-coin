@@ -5,7 +5,7 @@ import { Button } from '@/components/Button'
 import { Lista } from '@/components/Lista'
 import Progresso from '@/components/Progresso'
 import { Transacoes } from '@/components/Transacoes'
-import { TransacoesType } from '@/utils/TransacoesType'
+import { TransacoesType } from '@/utils/TransacoesTypes'
 
 const detalhes = {
     atual: 'R$ 2.000,00',
