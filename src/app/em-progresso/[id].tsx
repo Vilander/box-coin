@@ -5,6 +5,7 @@ import { Button } from '@/components/Button'
 import { Lista } from '@/components/Lista'
 import Progresso from '@/components/Progresso'
 import { Transacoes } from '@/components/Transacoes'
+import { TransacoesType } from '@/utils/TransacoesType'
 
 const detalhes = {
     atual: 'R$ 2.000,00',
@@ -18,21 +19,21 @@ const transacoes = [
     value: 'R$ 300,00',
     date: '12/04/2026',
     descricao: 'CDB de 110% do CDI',
-    tipo: 'input'
+    tipo: TransacoesType.Input
   },
   {
     id: '2',
     value: 'R$ 100,00',
     date: '14/04/2026',
     descricao: 'Retirada de emergencia',
-    tipo: 'output'
+    tipo: TransacoesType.Output
   },
   {
     id: '3',
     value: 'R$ 700,00',
     date: '16/04/2026',
     descricao: 'CDB de 110% do CDI',
-    tipo: 'input'
+    tipo: TransacoesType.Input
   }
 
 ]
