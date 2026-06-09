@@ -1,11 +1,11 @@
 import { View, Text } from 'react-native'
 
-import { styles } from './style'
+import { styles } from './styles'
 import { colors } from '@/theme/colors'
 
 import { Opcoes } from './opcoes'
 
-import { TransacoesTypes } from '@/utils/TransacoesType'
+import { TransacoesTypes } from '@/utils/TransacoesTypes'
 
 type Props = {
   selected: TransacoesTypes,

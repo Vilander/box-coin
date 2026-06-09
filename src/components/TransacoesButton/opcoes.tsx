@@ -3,7 +3,7 @@ import { ColorValue, Pressable, PressableProps, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 import { colors } from '@/theme/colors';
 
-import { styles } from './style';
+import { styles } from './styles';
 
 type Props = PressableProps & {
   isSelected: boolean,
