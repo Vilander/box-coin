@@ -5,7 +5,7 @@
             PRAGMA foreign_keys = ON;
             
             CREATE TABLE IF NOT EXISTS targets(
-                id INTERGER PRIMARY KEY,
+                id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL,
                 amount FLOAT NOT NULL,
                 created_at timestamp NOT NULL DEFAULT current_timestamp,
@@ -13,7 +13,7 @@
             );
 
             CREATE TABLE IF NOT EXISTS transactions(
-                id INTERGER PRIMARY KEY,
+                id INTEGER PRIMARY KEY,
                 target_id INTEGER NOT NULL,
                 amount FLOAT NOT NULL,
                 observation TEXT NULL,
@@ -24,5 +24,7 @@
                 FOREIGN KEY (target_id) REFERENCES targets(id)
                 ON DELETE CASCADE
             );
+
+         
         `) 
  } 
