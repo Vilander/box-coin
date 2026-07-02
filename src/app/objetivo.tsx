@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Alert, View, Text} from 'react-native'
 import { router } from 'expo-router'    
 import { PageHeader } from '@/components/PageHeader'
@@ -22,9 +22,26 @@ export default function Objetivo (){
             return Alert.alert("Atenção!","Preencha todos os campos.")
         }
         if(params.id){
-
+            atualizarDadosBanco()
         }else{
             salvarDadosBanco()
+        }
+    }
+
+    async function atualizarDadosBanco() {
+        try {
+            await boxcoinDatabase.update({
+                name: nomeMeta,
+                amount: Number(valor),
+                id: Number(params.id)
+            })
+            Alert.alert("Sucesso", "Meta atualizada com sucesso!",[
+                {text: "OK", onPress: () => router.back()}
+            ])
+
+        } catch (error) {
+            Alert.alert("Erro","Falha ao atualizar a meta")
+            console.log(error)
         }
     }
 
@@ -45,11 +62,58 @@ export default function Objetivo (){
         }
     }
 
+    async function fetchDetalhes(id: number){
+        try{
+            const response = boxcoinDatabase.show(id)
+            setNomeMeta(response?.name ?? "")
+            setValor (response?.amount ?? 0)
+        } catch (error){
+            Alert.alert("Erro", "Não foi possível carregar os detalhes da meta")
+            console.log(error)
+        }
+    }
+
+    async function fnUserDelete(){
+        try {
+            if(!params.id){
+                return Alert.alert("Erro","Não foi possível identificar a meta")
+            }
+            Alert.alert("Atenção!", "Deseja realmente excluir essa meta?",[
+                {text: "Cancelar", style: "cancel"},
+                {text: "Sim", onPress: async () => { await remover()}}
+            ])
+        } catch (error) {
+            Alert.alert("Erro","Erro ao excluir a meta")
+            console.log(error)
+        }
+    }
+
+    async function remover() {
+        await boxcoinDatabase.remove(Number(params.id))
+        Alert.alert("Sucesso", "Meta excluida", [
+            {text: "OK", onPress: () => router.replace("/")}
+        ])
+    }
+
+    useEffect(() => {
+        if(params.id){
+            fetchDetalhes(Number(params.id))
+        }
+    },[params.id])
+
+
+
     return(
         <View style={{flex:1, padding: 24, gap: 32}}>  
             <PageHeader 
                 titulo = "Meta"
                 subtitulo='Economize para alcançar sua meta financeira.'
+                rightButton={
+                        params.id ? {
+                            icon: 'delete',
+                            onPress: () => fnUserDelete()
+                        } : undefined
+                    }
             />
 
             <View style={{marginTop: 32, gap: 24}}>  
